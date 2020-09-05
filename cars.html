@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cars</title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+        var Car = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.speed = function(limit){
+                return Math.floor(Math.random()*limit)
+            }
+            // this.draw = function () {
+            //     var carHtml = '<img src="http://nostarch.com/images/car.png">';
+            //     var carElement = $(carHtml)
+            //     carElement.css({
+            //         position: "absolute",
+            //         left: this.x,
+            //         top: this.y
+            //     });
+
+            //     $("body").append(carElement)
+            // };
+            this.draw()
+        };
+
+        Car.prototype.draw = function () {
+            var carHtml = '<img src="http://nostarch.com/images/car.png">';
+            this.carElement = $(carHtml)
+            this.carElement.css({
+                position: "absolute",
+                left: this.x,
+                top: this.y
+            });
+
+            $("body").append(this.carElement)
+        }
+
+        Car.prototype.moveRight = function (dif) {
+            this.x += this.speed(dif);
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            })
+        }
+        Car.prototype.moveLeft = function (dif) {
+            this.x -= this.speed(dif);
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            });
+        };
+        Car.prototype.moveUp = function (dif) {
+            this.y -= this.speed(dif);
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            });
+        };
+        Car.prototype.moveDown = function (dif) {
+            this.y += this.speed(dif);
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            });
+        };
+
+
+
+        var tesla = new Car(20, 20);
+        var nissan = new Car(100, 200);
+       // tesla.draw()
+       // nissan.draw()
+       function goTesla () {tesla.moveRight(20)}
+       function goNissan () {nissan.moveRight(20)}
+       var car1Id = setInterval(goNissan, 300)
+       var car2Id = setInterval(goTesla, 300)
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
